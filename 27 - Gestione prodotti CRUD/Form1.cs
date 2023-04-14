@@ -59,6 +59,20 @@ namespace _27___Gestione_prodotti_CRUD
             v.voto = Convert.ToInt32(textBox4.Text);            
             v.cognome = textBox5.Text;
             v.nome = textBox6.Text;
+
+            textBox1.Text = "";
+            textBox1.Focus();
+            textBox2.Text = "";
+            textBox2.Focus();
+            textBox3.Text = "";
+            textBox3.Focus();
+            textBox4.Text = "";
+            textBox4.Focus();
+            textBox5.Text = "";
+            textBox5.Focus();
+            textBox6.Text = "";
+            textBox6.Focus();
+
             AggiungiSuFile(v);
 
         }
@@ -66,7 +80,7 @@ namespace _27___Gestione_prodotti_CRUD
         private void button2_Click(object sender, EventArgs e)
         {
 
-
+            Aggiorna(sender, e);
 
         }
 
@@ -137,5 +151,20 @@ namespace _27___Gestione_prodotti_CRUD
             sw.WriteLine(content);
             sw.Close();
         }
-    }
+
+        public void Aggiorna(object sender, EventArgs e)
+        {
+            using (StreamReader sw = File.OpenText(filename + @"/lista.txt"))
+            {
+                string s;
+
+                listView1.Items.Clear();
+
+                while ((s = sw.ReadLine()) != null)
+                {
+                    listView1.Items.Add(s);
+                }
+            }
+        }
+     }
 }

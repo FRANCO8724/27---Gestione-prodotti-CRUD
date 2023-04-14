@@ -6,22 +6,22 @@ namespace _27___Gestione_prodotti_CRUD
 {
     public partial class Form1 : Form
     {
-        public string path;
+        public static string filename;
 
         public Form1()
         {
             InitializeComponent();
 
-            path = Path.GetFullPath("."); //Percorso del file
+            filename = Path.GetFullPath("."); //Percorso del file
 
-            path = Path.GetDirectoryName(path); //Torna indietro di una cartella
-            path = Path.GetDirectoryName(path); //Torna indietro di una cartella
-            path = Path.GetDirectoryName(path); //Torna indietro di una cartella
+            filename = Path.GetDirectoryName(filename); //Torna indietro di una cartella
+            filename = Path.GetDirectoryName(filename); //Torna indietro di una cartella
+            filename = Path.GetDirectoryName(filename); //Torna indietro di una cartella
 
-            path += @"/lista";
+            filename += @"/lista";
 
-            Directory.CreateDirectory(path);
-            StreamWriter sw = new StreamWriter(path + @"/lista.txt");
+            Directory.CreateDirectory(filename);
+            StreamWriter sw = new StreamWriter(filename + @"/lista.txt");
             sw.Close();
         }
 
@@ -54,19 +54,12 @@ namespace _27___Gestione_prodotti_CRUD
 
             Voto v;
             v.id = Convert.ToInt32(textBox1.Text);
-            v.cognome = textBox2.Text;
-            v.nome = textBox3.Text;
-            v.data = textBox4.Text;
-            v.voto = Convert.ToInt32(textBox5.Text);
-            v.materia = textBox6.Text;
-
-
-            Directory.CreateDirectory(path);
-            StreamWriter sw = new StreamWriter(path + @"/lista.txt");
-
-            AggiungiSuFile(v, path);
-
-            sw.Close();
+            v.materia = textBox2.Text;
+            v.data = textBox3.Text;
+            v.voto = Convert.ToInt32(textBox4.Text);            
+            v.cognome = textBox5.Text;
+            v.nome = textBox6.Text;
+            AggiungiSuFile(v);
 
         }
 
@@ -94,9 +87,9 @@ namespace _27___Gestione_prodotti_CRUD
 
         //Funzioni di servizio
 
-        public static void AggiungiSuFile(Voto v, string filename)
+        public static void AggiungiSuFile(Voto v)
         {
-            scriviAppend(ToString(v), filename);
+            scriviAppend(ToString(v));
         }
 
         public static Voto FromString(string votoStringa, string sep = ";")
@@ -137,7 +130,7 @@ namespace _27___Gestione_prodotti_CRUD
             return line;
         }
 
-        public static void scriviAppend(string content, string filename)
+        public static void scriviAppend(string content)
         {
             var oStream = new FileStream(filename, FileMode.Append, FileAccess.Write, FileShare.Read);
             StreamWriter sw = new StreamWriter(oStream);

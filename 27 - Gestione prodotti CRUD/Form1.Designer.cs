@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.listView1 = new System.Windows.Forms.ListView();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -60,6 +61,7 @@
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
             this.label15 = new System.Windows.Forms.Label();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.SuspendLayout();
             // 
             // listView1
@@ -328,6 +330,11 @@
             this.label15.TabIndex = 31;
             this.label15.Text = "voto";
             // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -408,6 +415,7 @@
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
     }
 }
 

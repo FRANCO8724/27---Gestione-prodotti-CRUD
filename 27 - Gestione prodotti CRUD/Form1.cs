@@ -132,7 +132,7 @@ namespace _27___Gestione_prodotti_CRUD
 
         public static void scriviAppend(string content)
         {
-            var oStream = new FileStream(filename, FileMode.Append, FileAccess.Write, FileShare.Read);
+            var oStream = new FileStream(filename + @"/lista.txt", FileMode.Append, FileAccess.Write, FileShare.Read);
             StreamWriter sw = new StreamWriter(oStream);
             sw.WriteLine(content);
             sw.Close();

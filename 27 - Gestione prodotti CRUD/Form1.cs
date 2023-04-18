@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace _27___Gestione_prodotti_CRUD
 {
@@ -24,8 +25,6 @@ namespace _27___Gestione_prodotti_CRUD
             StreamWriter sw = new StreamWriter(filename + @"/lista.txt");
             sw.Close();
         }
-
-        
 
         public struct Voto
         {
@@ -53,10 +52,31 @@ namespace _27___Gestione_prodotti_CRUD
         {
 
             Voto v;
-            v.id = Convert.ToInt32(textBox1.Text);
+            int a = Convert.ToInt32(textBox1.Text);
+
+            if(textBox1.Text=="")
+            {
+                v.id = 0;
+            }
+            else
+            {
+                v.id = a;
+            }
+
             v.materia = textBox2.Text;
             v.data = textBox3.Text;
-            v.voto = Convert.ToInt32(textBox4.Text);            
+
+            int a2 = Convert.ToInt32(textBox4.Text);
+
+            if (textBox4.Text == "")
+            {
+                v.voto = 0;
+            }
+            else
+            {
+                v.voto = a2;
+            }
+
             v.cognome = textBox5.Text;
             v.nome = textBox6.Text;
 
@@ -79,18 +99,58 @@ namespace _27___Gestione_prodotti_CRUD
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+            listView1.Items.Clear();
             Aggiorna(sender, e);
 
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
+            string a = Convert.ToString(textBox7.Text);
 
+            Voto v = cercaVoto(a,filename);
+
+            v.id = Convert.ToInt32(textBox7.Text);
+            v.materia = textBox2.Text;
+            v.data = textBox3.Text;
+            v.voto = Convert.ToInt32(textBox4.Text);
+            v.cognome = textBox5.Text;
+            v.nome = textBox6.Text;       
+            
+            
+
+            textBox7.Text = "";
+            textBox7.Focus();
+            textBox1.Text = "";
+            textBox1.Focus();
+            textBox2.Text = "";
+            textBox2.Focus();
+            textBox3.Text = "";
+            textBox3.Focus();
+            textBox4.Text = "";
+            textBox4.Focus();
+            textBox5.Text = "";
+            textBox5.Focus();
+            textBox6.Text = "";
+            textBox6.Focus();
+
+            AggiungiSuFile(v);
         }
 
         private void button4_Click(object sender, EventArgs e)
         {
+            string a = Convert.ToString(textBox7.Text);
+
+            Voto v = cercaVoto(a, filename);
+
+            v.id = 0;
+            v.materia = "";
+            v.data = "";
+            v.voto = 0;
+            v.cognome = "";
+            v.nome = "";
+
+            AggiungiSuFile(v);
 
         }
 
@@ -120,15 +180,15 @@ namespace _27___Gestione_prodotti_CRUD
             return v;
         }
 
-        public static Voto cercaVoto(int id, string filename)
+        public static Voto cercaVoto(string id, string filename)
         {
             return FromString(cercaSuFile(id, filename));
         }
 
-        public static string cercaSuFile(int id, string filename, string sep = ";")
+        public static string cercaSuFile(string id, string filename, string sep = ";")
         {
-            StreamReader sr = new StreamReader(filename);
-            string line = "";
+            StreamReader sr = new StreamReader(filename + @"/lista.txt");
+            string line = id;
 
             while (!sr.EndOfStream)
             {
@@ -166,5 +226,10 @@ namespace _27___Gestione_prodotti_CRUD
                 }
             }
         }
-     }
+
+        private void label15_Click(object sender, EventArgs e)
+        {
+
+        }
+    }
 }
